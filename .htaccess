@@ -1,0 +1,14 @@
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+
+  # Définir la racine du projet (ici le dossier appliLivraison)
+  # RewriteBase /appliLivraison/
+
+  # Ne pas rediriger si le fichier ou dossier existe
+  RewriteCond %{REQUEST_FILENAME} -f [OR]
+  RewriteCond %{REQUEST_FILENAME} -d
+  RewriteRule ^ - [L]
+
+  # Sinon, rediriger tout vers index.php
+  RewriteRule ^ index.php [QSA,L]
+</IfModule>

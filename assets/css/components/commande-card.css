@@ -1,0 +1,237 @@
+.commande-card {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    padding: 1.5rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-left: 4px solid #ccc;
+}
+
+.commande-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Statuts */
+.commande-card.statut-attente {
+    border-left-color: #ff9800;
+}
+
+.commande-card.statut-preparation {
+    border-left-color: #2196f3;
+}
+
+.commande-card.statut-livraison {
+    border-left-color: #9c27b0;
+}
+
+.commande-card.statut-livree {
+    border-left-color: #4caf50;
+}
+
+.commande-card.statut-annulee {
+    border-left-color: #f44336;
+    opacity: 0.7;
+}
+
+/* Header */
+.commande-card__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.commande-card__numero {
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: #333;
+    margin: 0;
+}
+
+.commande-card__statut {
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.statut-attente .commande-card__statut {
+    background-color: #fff3e0;
+    color: #ff9800;
+}
+
+.statut-preparation .commande-card__statut {
+    background-color: #e3f2fd;
+    color: #2196f3;
+}
+
+.statut-livraison .commande-card__statut {
+    background-color: #f3e5f5;
+    color: #9c27b0;
+}
+
+.statut-livree .commande-card__statut {
+    background-color: #e8f5e9;
+    color: #4caf50;
+}
+
+.statut-annulee .commande-card__statut {
+    background-color: #ffebee;
+    color: #f44336;
+}
+
+/* Body */
+.commande-card__body {
+    margin-bottom: 1rem;
+}
+
+.commande-card__info {
+    margin-bottom: 1rem;
+}
+
+.commande-card__info p {
+    margin: 0.5rem 0;
+    color: #666;
+    font-size: 0.9rem;
+}
+
+.commande-card__info strong {
+    color: #333;
+}
+
+.commande-card__adresse {
+    color: #555;
+    font-style: italic;
+}
+
+.commande-card__notes {
+    background-color: #fff9c4;
+    padding: 0.5rem;
+    border-radius: 4px;
+    margin-top: 0.5rem;
+}
+
+/* Pizzas */
+.commande-card__pizzas {
+    background-color: #f5f5f5;
+    padding: 1rem;
+    border-radius: 4px;
+    margin-top: 1rem;
+}
+
+.commande-card__pizzas h4 {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+    color: #333;
+}
+
+.commande-card__pizza-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.commande-card__pizza-item:last-child {
+    border-bottom: none;
+}
+
+.commande-card__pizza-quantite {
+    font-weight: bold;
+    color: #2196f3;
+    min-width: 40px;
+}
+
+.commande-card__pizza-nom {
+    flex: 1;
+    margin: 0 1rem;
+}
+
+.commande-card__pizza-prix {
+    font-weight: 600;
+    color: #4caf50;
+}
+
+.commande-card__pizzas-vide {
+    color: #999;
+    font-style: italic;
+    margin: 0;
+}
+
+/* Footer */
+.commande-card__footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 1rem;
+    border-top: 1px solid #e0e0e0;
+}
+
+.commande-card__total {
+    font-size: 1.25rem;
+    color: #333;
+}
+
+.commande-card__total strong {
+    color: #4caf50;
+}
+
+.commande-card__actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.commande-card__actions .btn {
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 4px;
+    font-size: 0.875rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-details {
+    background-color: #2196f3;
+    color: white;
+}
+
+.btn-details:hover {
+    background-color: #1976d2;
+}
+
+.btn-modifier {
+    background-color: #ff9800;
+    color: white;
+}
+
+.btn-modifier:hover {
+    background-color: #f57c00;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .commande-card__header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+
+    .commande-card__footer {
+        flex-direction: column;
+        gap: 1rem;
+        align-items: flex-start;
+    }
+
+    .commande-card__actions {
+        width: 100%;
+    }
+
+    .commande-card__actions .btn {
+        flex: 1;
+    }
+}
