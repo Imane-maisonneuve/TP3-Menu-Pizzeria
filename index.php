@@ -3,7 +3,7 @@
 
 <head>
     <!-- À modifier si votre application n'est pas à la racine du serveur web -->
-    <!-- <base href="/appliLivraison/"> -->
+    <base href="/TP3-Menu-Pizzeria/">
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />

@@ -1,10 +1,10 @@
 class Accueil {
-    #application = null;
+  #application = null;
 
-    constructor(application) {
-        this.#application = application;
-    }
+  constructor(application) {
+    this.#application = application;
+  }
 
-    render() {}
+  render() {}
 }
 export default Accueil;
