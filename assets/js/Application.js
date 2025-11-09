@@ -1,5 +1,7 @@
 import Router from "./Router.js";
 import Toast from "./components/Toast.js";
+import ToastErreur from "./components/ToastErreur.js";
+import ToastSucces from "./components/ToastSucces.js";
 
 class Application {
   #conteneurHTML = null;
@@ -29,33 +31,39 @@ class Application {
     }
   }
 
-  async rechercherServiceParId(id) {
-    try {
-      const reponse = await fetch(`api/pizzas/RechercherUn.php?id=${id}`);
-      const resultat = await reponse.json();
+  // async rechercherServiceParId(id) {
+  //   try {
+  //     const reponse = await fetch(`api/pizzas/RechercherUn.php?id=${id}`);
+  //     const resultat = await reponse.json();
 
-      return resultat.donnees;
-    } catch (erreur) {
-      new Toast(document.body, erreur.message);
-    }
-  }
+  //     return resultat.donnees;
+  //   } catch (erreur) {
+  //     new Toast(document.body, erreur.message);
+  //   }
+  // }
 
-  async ajouterService(donnees) {
+  async ajouterPizza(nouvellePizza) {
     try {
       const config = {
         method: "POST",
         headers: {
-          "Content-Type": "application/json",
+          "Content-Type": "application/JSON",
         },
-        body: JSON.stringify(donnees),
+        body: JSON.stringify(nouvellePizza),
       };
 
-      const reponse = await fetch("api/pizzas/AjouterUn.php", config);
+      const reponse = await fetch("api/pizzas/ajouterUn.php", config);
       const resultat = await reponse.json();
+
+      if (!resultat.id) {
+        throw new Error(resultat.message);
+      } else {
+        new ToastSucces(resultat.message);
+      }
 
       return resultat.id;
     } catch (erreur) {
-      new Toast(document.body, erreur.message);
+      new ToastErreur(erreur.message);
     }
   }
 

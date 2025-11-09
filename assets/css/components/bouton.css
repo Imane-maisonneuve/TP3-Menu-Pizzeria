@@ -4,7 +4,7 @@
   border: 2px solid darkred;
   border-radius: 5px;
   cursor: pointer;
-  width: fit-content;
+  /* width: fit-content; */
   padding: 5px;
   text-decoration: none;
 }

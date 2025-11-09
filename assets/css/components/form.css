@@ -1,0 +1,23 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 500px;
+  margin: 60px auto;
+  padding: 20px;
+  border: 1px solid lightgray;
+  border-radius: 5px;
+  font-family: sans-serif;
+}
+
+.form > * {
+  margin-top: 10px;
+}
+
+.form input,
+select {
+  font-family: "Roboto", sans-serif;
+  padding: 10px 5px;
+  border: 1px solid lightgray;
+  border-radius: 4px;
+}

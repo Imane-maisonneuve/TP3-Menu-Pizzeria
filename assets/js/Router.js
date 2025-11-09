@@ -10,7 +10,8 @@ class Router {
 
   constructor(application) {
     this.#application = application;
-    this.#basename = "/appliLivraison";
+    // this.#basename = "/appliLivraison";
+    this.#basename = "";
     this.#routes = {
       "": Accueil,
       admin: PizzaAjout,
