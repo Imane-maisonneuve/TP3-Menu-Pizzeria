@@ -1,10 +1,18 @@
 class Pizza404 {
-    #application = null;
+  #application = null;
 
-    constructor(application) {
-        this.#application = application;
-    }
+  constructor(application) {
+    this.#application = application;
+  }
 
-    render() {}
+  render() {
+    this.#application.conteneurHTML.innerHTML = "";
+    const gabarit = `<div>
+            <h1>Page non trouvée</h1>
+            <a href="/" data-link>Retour à l'accueil</a>
+        </div>`;
+
+    this.#application.conteneurHTML.insertAdjacentHTML("beforeend", gabarit);
+  }
 }
 export default Pizza404;

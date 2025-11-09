@@ -3,7 +3,7 @@
 
 <head>
     <!-- À modifier si votre application n'est pas à la racine du serveur web -->
-    <base href="/TP3-Menu-Pizzeria/">
+    <!-- <base href="/appliLivraison/"> -->
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
@@ -28,7 +28,7 @@
     </header>
     <main data-application></main>
     <footer>
-        <p>&copy; 2024 Pizzeria Livraison - Tous droits réservés</p>
+        <p>&copy; 2025 Pizzeria Livraison - Tous droits réservés</p>
     </footer>
 </body>
 

@@ -1,22 +1,22 @@
-import AccueilView from "./views/AccueilView.js";
+import Accueil from "./views/Accueil.js";
 import Pizza404 from "./views/Pizza404.js";
-import AjoutView from "./views/AjoutView.js";
-import DetailView from "./views/DetailView.js";
+import PizzaAjout from "./views/PizzaAjout.js";
+import PizzaDetail from "./views/PizzaDetail.js";
 class Router {
-  #application = null;
+  #application;
   #routes;
   #vueActuelle;
   #basename;
 
   constructor(application) {
     this.#application = application;
-    this.#basename = "/TP3-Menu-Pizzeria";
-
+    this.#basename = "/appliLivraison";
     this.#routes = {
-      "": "Acceuil",
-      admin: "Formulaire",
-      pizza: "PizzaDetail",
+      "": Accueil,
+      admin: PizzaAjout,
+      pizza: PizzaDetail,
     };
+
     this.miseAJour();
     document.body.addEventListener("click", this.#onClicLien.bind(this));
     window.addEventListener("popstate", this.miseAJour.bind(this));
@@ -56,7 +56,6 @@ class Router {
 
     const route = tableau.length > 0 ? tableau[0] : "";
     const parametreDynamique = tableau[1];
-    console.log(route);
 
     let Vue = this.#routes[route];
 

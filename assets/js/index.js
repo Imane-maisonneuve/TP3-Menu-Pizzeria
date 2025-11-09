@@ -2,8 +2,8 @@ import Application from "./Application.js";
 
 // Fonctions
 function initialiser() {
-    new Application();
+  new Application();
 }
 
 // Exécution
-window.addEventListener("load", initialiser);
+window.addEventListener("DOMContentLoaded", initialiser);

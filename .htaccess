@@ -2,7 +2,7 @@
   RewriteEngine On
 
   # Définir la racine du projet (ici le dossier appliLivraison)
-  RewriteBase /TP3-Menu-Pizzeria/
+   RewriteBase /appliLivraison/
 
   # Ne pas rediriger si le fichier ou dossier existe
   RewriteCond %{REQUEST_FILENAME} -f [OR]

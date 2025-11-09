@@ -1,60 +1,62 @@
-import filtre from "./Application.js";
-
-/**
- * classe Filtre qui gère la logique de filtrage des livres
- */
 class Filtre {
-  #elementHTML;
-  #application;
-  #listeLivreClone;
+  #conteneur;
+  #element;
+  #ordre;
+  #tri;
 
-  /**
-   * Le constructeur reçoit une instance de l’application principale
-   */
-  constructor(application) {
-    this.#application = application;
+  constructor(conteneur) {
+    this.#conteneur = conteneur;
+    this.#ordre = "asc";
+    this.#tri = "prix";
 
-    // Sélection de l’élément HTML contenant les filtres
-    this.#elementHTML = document.querySelector("[data-filtres]");
-
-    // Ajout d’un écouteur d’événement sur les clics dans la zone des filtres
-    this.#elementHTML.addEventListener("click", this.onClicFiltre.bind(this));
+    this.#render();
   }
 
-  /**
-   * Récupération de la catégorie du filtre cliqué et appel de la méthode de filtrage
-   * @param {*} evenement
-   */
   onClicFiltre(evenement) {
-    const declencheur = evenement.target.closest("[data-categorie]");
-    const listeLivreClone = [...this.#application.listeLivres];
-
-    let categorie = declencheur.dataset.categorie;
-
-    this.filtrer(categorie, listeLivreClone);
+    const option = evenement.target.selectedOptions[0]; // recherche avec chatGPt pour voir comment on selectionne les options du <select>
+    if (option) {
+      this.#tri = option.dataset.tri;
+      this.#ordre = option.dataset.ordre;
+      const nouvelEvenement = new CustomEvent("changementFiltre");
+      window.dispatchEvent(nouvelEvenement);
+    }
   }
 
-  /**
-   * Méthode de filtrage des livres selon la catégorie choisie
-   * @param {string} categorie
-   * @param {Array} listeLivres
-   */
-  filtrer(categorie, listeLivres) {
-    // Si clique sur "Tous", on affiche la liste complète
-    if (categorie === "Tous") {
-      this.#application.afficherListeLivres();
-    } else {
-      const nouvelleListe = listeLivres.filter(function (livre) {
-        // particulier : catégorie "nouveaute" correspond au booléen nouveaute
-        if (categorie === "nouveaute") {
-          return livre.nouveaute === true;
-        } else {
-          return livre.categorie === categorie;
+  trier(listePizzas) {
+    const liste = [...listePizzas];
+    liste.sort(
+      function (a, b) {
+        let comparaison = 0;
+        if (this.#tri == "prix") {
+          comparaison = a.prix - b.prix;
         }
-      });
-      // Affichage de la nouvelle liste filtrée dans l’application
-      this.#application.afficherListeFiltre(nouvelleListe);
-    }
+
+        if (this.#ordre == "desc") {
+          comparaison = comparaison * -1;
+        }
+        return comparaison;
+      }.bind(this)
+    );
+
+    return liste;
+  }
+
+  #render() {
+    const gabarit = `
+      <div class="entete">
+        <h1>Menu<h1>
+        <select data-filtres>
+          <option data-tri="prix" data-ordre="asc">Trier par prix ascendant</option>
+          <option data-tri="prix" data-ordre="desc">Trier par prix descendant</option>
+        </select>
+      </div>
+    `;
+
+    this.#conteneur.insertAdjacentHTML("beforeend", gabarit);
+    this.#element = this.#conteneur.querySelector("[data-filtres]");
+    console.log(this.#element);
+
+    this.#element.addEventListener("change", this.onClicFiltre.bind(this)); // Recherche avec chatGPt pour déterminer quel évènement est déclenché car le click ne marchait pas pour le <select>
   }
 }
 

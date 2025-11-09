@@ -1,12 +1,12 @@
 import Router from "./Router.js";
 import Toast from "./components/Toast.js";
+
 class Application {
   #conteneurHTML = null;
   #router;
   #listePizzas;
 
   constructor() {
-    // Initialisation du DOM
     this.#conteneurHTML = document.querySelector("[data-application]");
     this.#router = new Router(this);
   }
@@ -19,13 +19,11 @@ class Application {
     return this.#router;
   }
 
-  async rechercherPizzas() {
+  async rechercherListePizzas() {
     try {
       const reponse = await fetch("api/pizzas/RechercherTout.php");
       const resultat = await reponse.json();
-      console.log(reponse);
-
-      return resultat.donnees;
+      return resultat.data;
     } catch (erreur) {
       new Toast(document.body, erreur.message);
     }
@@ -61,22 +59,22 @@ class Application {
     }
   }
 
-  modifierService() {}
+  // modifierService() {}
 
-  async supprimerService(id) {
-    try {
-      const reponse = await fetch(`api/pizzas/SupprimerUn.php?id=${id}`);
-      const resultat = await reponse.json();
+  // async supprimerService(id) {
+  //   try {
+  //     const reponse = await fetch(`api/pizzas/SupprimerUn.php?id=${id}`);
+  //     const resultat = await reponse.json();
 
-      if (!reponse.ok) {
-        throw new Error(resultat);
-      }
+  //     if (!reponse.ok) {
+  //       throw new Error(resultat);
+  //     }
 
-      return resultat;
-    } catch (erreur) {
-      new Toast(document.body, erreur.message);
-    }
-  }
+  //     return resultat;
+  //   } catch (erreur) {
+  //     new Toast(document.body, erreur.message);
+  //   }
+  // }
 }
 
 export default Application;
