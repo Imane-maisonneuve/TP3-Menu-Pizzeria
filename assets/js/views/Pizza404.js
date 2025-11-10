@@ -4,13 +4,12 @@ class Pizza404 {
   constructor(application) {
     this.#application = application;
   }
-
+  // Rendre la vue 404
   render() {
     this.#application.conteneurHTML.innerHTML = "";
-    const gabarit = `<div>
-            <h1>Page non trouvée</h1>
-            <a href="/" data-link>Retour à l'accueil</a>
-        </div>`;
+    const gabarit = `<div class ="image404">
+      <img src="assets/img/page404.jpg" alt="">
+     </div>`;
 
     this.#application.conteneurHTML.insertAdjacentHTML("beforeend", gabarit);
   }

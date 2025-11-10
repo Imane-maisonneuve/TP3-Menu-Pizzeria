@@ -6,7 +6,6 @@ import ToastSucces from "./components/ToastSucces.js";
 class Application {
   #conteneurHTML = null;
   #router;
-  #listePizzas;
 
   constructor() {
     this.#conteneurHTML = document.querySelector("[data-application]");
@@ -21,27 +20,37 @@ class Application {
     return this.#router;
   }
 
+  // rechercher toutes les pizzas pour les afficher dans la page d'accueil
   async rechercherListePizzas() {
     try {
-      const reponse = await fetch("api/pizzas/RechercherTout.php");
+      const reponse = await fetch("/api/pizzas/RechercherTout.php");
       const resultat = await reponse.json();
+      if (!resultat.data) {
+        throw new Error(resultat.message);
+      }
       return resultat.data;
     } catch (erreur) {
-      new Toast(document.body, erreur.message);
+      new ToastErreur(erreur.message);
     }
   }
 
-  // async rechercherServiceParId(id) {
-  //   try {
-  //     const reponse = await fetch(`api/pizzas/RechercherUn.php?id=${id}`);
-  //     const resultat = await reponse.json();
+  // rechercher une pizza par son id pour l'afficher dans la page de détail
+  async rechercherPizzaParId(id) {
+    try {
+      const reponse = await fetch(`/api/pizzas/rechercherUn.php?id=${id}`);
+      const resultat = await reponse.json();
 
-  //     return resultat.donnees;
-  //   } catch (erreur) {
-  //     new Toast(document.body, erreur.message);
-  //   }
-  // }
+      if (resultat.message) {
+        throw new Error(resultat.message);
+      }
 
+      return resultat;
+    } catch (erreur) {
+      new ToastErreur(erreur.message);
+    }
+  }
+
+  // ajouter une nouvelle pizza
   async ajouterPizza(nouvellePizza) {
     try {
       const config = {
@@ -66,23 +75,6 @@ class Application {
       new ToastErreur(erreur.message);
     }
   }
-
-  // modifierService() {}
-
-  // async supprimerService(id) {
-  //   try {
-  //     const reponse = await fetch(`api/pizzas/SupprimerUn.php?id=${id}`);
-  //     const resultat = await reponse.json();
-
-  //     if (!reponse.ok) {
-  //       throw new Error(resultat);
-  //     }
-
-  //     return resultat;
-  //   } catch (erreur) {
-  //     new Toast(document.body, erreur.message);
-  //   }
-  // }
 }
 
 export default Application;

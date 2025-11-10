@@ -10,6 +10,7 @@ class PizzaAjout {
     this.#application = application;
   }
 
+  //  recuperer les donnees du formulaire et les envoier a l'application
   async #onSubmit(evenement) {
     evenement.preventDefault();
     const champs = this.#formulaire.querySelectorAll("[name]");
@@ -19,8 +20,10 @@ class PizzaAjout {
         nouvellePizza[champ.name] = champ.value;
       }.bind(this)
     );
-
+    // envoyer les donnees a l'application
     const id = await this.#application.ajouterPizza(nouvellePizza);
+
+    // si l'insertion a reussi, naviguer vers la page d'accueil
     if (id) {
       this.#formulaire.resert;
       this.#application.router.naviguer("/");
@@ -30,25 +33,25 @@ class PizzaAjout {
   async render() {
     this.#application.conteneurHTML.innerHTML = "";
     const gabarit = `
-        <div>
-            <form class="form">
-                <h2>Ajouter une Pizza!</h2>
-                <label for="nom">Nom</label>
-                <input id="nom" name="nom" type="text" required>
+      <div>
+          <form class="form">
+              <h2>Ajouter une Pizza!</h2>
+              <label for="nom">Nom de la pizza</label>
+              <input id="nom" name="nom" type="text" required>
 
-                <label for="description">Description</label>
-                <input id="description" name="description" type="text" required>
+              <label for="description">Description</label>
+              <input id="description" name="description" type="text" required>
 
-                <label for="prix">Prix</label>
-                <input id="prix" name="prix" type="number" required>
+              <label for="prix">Prix</label>
+              <input id="prix" name="prix" type="number" required>
 
-                <label for="image_url">Image</label>
-                <input id="image_url" name="image_url" type="text" required>
+              <label for="image_url">Image</label>
+              <input id="image_url" name="image_url" type="text" required>
 
-                <input type="submit" value="Ajouter" class="bouton">
-            </form>
-        </div>
-            `;
+              <input type="submit" value="Ajouter" class="bouton strong">
+          </form>
+      </div>
+          `;
 
     this.#application.conteneurHTML.insertAdjacentHTML("beforeend", gabarit);
     this.#formulaire = this.#application.conteneurHTML.querySelector("form");

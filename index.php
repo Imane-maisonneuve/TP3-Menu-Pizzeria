@@ -8,9 +8,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
     <!-- CSS principal -->
-    <link rel="stylesheet" href="assets/css/styles.css" />
+    <link rel="stylesheet" href="/assets/css/styles.css" />
     <!-- JS principal -->
-    <script type="module" src="assets/js/index.js"></script>
+    <script type="module" src="/assets/js/index.js"></script>
     <title>Pizzeria Livraison</title>
 </head>
 

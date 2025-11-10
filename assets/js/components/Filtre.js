@@ -12,7 +12,8 @@ class Filtre {
     this.#render();
   }
 
-  onClicFiltre(evenement) {
+  // Méthode appelée lors du changement de sélection dans le <select> pour la gestion du tri
+  onChangeFiltre(evenement) {
     const option = evenement.target.selectedOptions[0]; // recherche avec chatGPt pour voir comment on selectionne les options du <select>
     if (option) {
       this.#tri = option.dataset.tri;
@@ -22,8 +23,10 @@ class Filtre {
     }
   }
 
+  // Tri de la liste en fonction du critère et de l'ordre sélectionnés
   trier(listePizzas) {
     const liste = [...listePizzas];
+
     liste.sort(
       function (a, b) {
         let comparaison = 0;
@@ -41,10 +44,11 @@ class Filtre {
     return liste;
   }
 
+  // Méthode de rendu du composant Filtre
   #render() {
     const gabarit = `
       <div class="entete">
-        <h1>Menu<h1>
+        <h1>Nos pizzas<h1>
         <select data-filtres>
           <option data-tri="prix" data-ordre="asc">Trier par prix ascendant</option>
           <option data-tri="prix" data-ordre="desc">Trier par prix descendant</option>
@@ -54,9 +58,8 @@ class Filtre {
 
     this.#conteneur.insertAdjacentHTML("beforeend", gabarit);
     this.#element = this.#conteneur.querySelector("[data-filtres]");
-    console.log(this.#element);
-
-    this.#element.addEventListener("change", this.onClicFiltre.bind(this)); // Recherche avec chatGPt pour déterminer quel évènement est déclenché car le click ne marchait pas pour le <select>
+    // Ajouter l'écouteur d'évènement sur le <select>
+    this.#element.addEventListener("change", this.onChangeFiltre.bind(this)); // Recherche avec chatGPt pour déterminer quel évènement est déclenché car le click ne marchait pas pour le <select>
   }
 }
 

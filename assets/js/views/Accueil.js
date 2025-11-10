@@ -1,4 +1,5 @@
 import Toast from "../components/Toast.js";
+import ToastErreur from "../components/ToastErreur.js";
 import Filtre from "../components/Filtre.js";
 
 class Accueil {
@@ -11,44 +12,44 @@ class Accueil {
     window.addEventListener("changementFiltre", this.#trierListe.bind(this));
   }
 
+  // Génèrer le gabarit HTML d'une carte de pizza
   #genererCarte(pizza) {
     const gabarit = `
-            <div class="pizza-card">               
-                    ${
-                      pizza.image_url
-                        ? `
-                        <div class="pizza-card__image">
-                            <img src="assets/img/${pizza.image_url}" alt="${pizza.nom}">
-                        </div>
-                    `
-                        : `
-                        <div class="pizza-card__image">
-                            <img src="assets/img/carnivore.jpg" alt="${pizza.nom}">
-                        </div>
-                    `
-                    }
-                    <div class="pizza-card__content">
-                        <div>
-                          <h3 class="pizza-card__nom">${pizza.nom}</h3>
-                          ${
-                            pizza.description
-                              ? `<p class="pizza-card__description">${pizza.description}</p>`
-                              : ""
-                          }
-                        </div>
-                        <div class="pizza-card__footer">
-                            <span class="pizza-card__prix">${pizza.prix}$</span>
-
-                            <a href="/pizza/${
-                              pizza.id
-                            }" data-link class="bouton">Voir détail</a>
-                        </div>
-                    </div>
+      <div class="pizza-card">               
+        ${
+          pizza.image_url
+            ? `
+            <div class="pizza-card__image">
+                <img src="assets/img/${pizza.image_url}" alt="${pizza.nom}">
             </div>
-        `;
+        `
+            : `
+            <div class="pizza-card__image">
+                <img src="assets/img/carnivore.jpg" alt="${pizza.nom}">
+            </div>
+        `
+        }
+        <div class="pizza-card__content">
+            <div>
+                <h3 class="pizza-card__nom">${pizza.nom}</h3>
+              ${
+                pizza.description
+                  ? `<p class="pizza-card__description">${pizza.description}</p>`
+                  : ""
+              }
+            </div>
+            <div class="pizza-card__footer">
+                <span class="pizza-card__prix">${pizza.prix}$</span>
+                <a href="/pizza/${
+                  pizza.id
+                }" data-link class="bouton">Voir détail</a>
+            </div>
+        </div>
+      </div>`;
     return gabarit;
   }
 
+  // Génèrer le gabarit HTML de la liste des pizzas
   #genererListe(liste) {
     let grille = '<div class="grille">';
 
@@ -60,6 +61,7 @@ class Accueil {
     return grille;
   }
 
+  // Mettre à jour l'affichage de la liste des pizzas en fonction du filtre
   #trierListe() {
     const conteneurListe = this.#application.conteneurHTML.querySelector(
       "[data-liste-pizzas]"
@@ -68,6 +70,7 @@ class Accueil {
     conteneurListe.innerHTML = this.#genererListe(nouvelleListe);
   }
 
+  // Rendre la vue Accueil
   async render() {
     try {
       this.#listePizzas = await this.#application.rechercherListePizzas();
@@ -90,8 +93,9 @@ class Accueil {
       );
       this.#filtre = new Filtre(contenurFiltre);
     } catch (erreur) {
-      new Toast(erreur.message);
+      new ToastErreur(erreur.message);
     }
   }
 }
+
 export default Accueil;

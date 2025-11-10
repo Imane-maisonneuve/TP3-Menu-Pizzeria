@@ -1,10 +1,18 @@
 .bouton {
-  background-color: tomato;
-  color: white;
-  border: 2px solid darkred;
-  border-radius: 5px;
+  background-color: #f8eecb;
+  color: #31603d;
+  border: 2px solid #f5c065;
+  border-radius: 50px;
   cursor: pointer;
-  /* width: fit-content; */
-  padding: 5px;
+  padding: 5px 10px;
   text-decoration: none;
+}
+
+.bouton:hover {
+  background-color: #f5e7c4;
+}
+
+.bouton.strong {
+  font-weight: bold;
+  font-size: medium;
 }
